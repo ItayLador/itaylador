@@ -1,0 +1,35 @@
+{% extends "home/layout.html" %}
+
+{% block title %}
+    Programs - 
+{% endblock %}
+
+{% block body%}
+
+<style>
+    #programs { 
+       border-bottom-color: #0B2365;
+       border-bottom-width: 5px;
+       border-style: solid;
+    }
+   </style>
+
+
+<div class="container">
+
+    <div class="programs-container" style="width: 100vw;">
+    {% for program in programs %}
+
+                <a class="program" style="background-image: url({{program.img}}); width: 33.2vw;
+                height: 50vh;" 
+                href="{{program.link}}">
+
+                    <div class="program-name" style="font-size: 28px;">
+                        {{program.name}}
+                    </div>
+
+                </a>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

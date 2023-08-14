@@ -1,0 +1,125 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+   {{member.name}} - 
+{% endblock %}
+
+
+{% block body %}
+<style>
+    #header {
+    width: 50vw;
+    background-position: center;
+    background-size: cover;
+    height: 84.5vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: blue;
+    position: fixed;
+    
+ }
+
+ #member-page-view {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 84.5vh;
+    overflow-y: auto;
+ }
+
+ #member-page-content {
+    width: 50vw;
+ }
+
+ #member-page-title {
+    font-size: 30px;
+    color: rgb(18, 18, 85);
+    font-weight: 700;
+    margin-left: 1vw;
+ }
+
+ #member-page-text {
+    font-size: 20px;
+    line-height: 32px;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    margin-top: 3vh;
+ }
+
+ .member-job {
+    margin-left: 1vw;
+    margin-bottom: .5vh;
+    width: 30vw;
+ }
+
+ .member-email {
+    color: black;
+    opacity: .4;
+    font-size: 17px;
+    margin-left: 1vw;
+    text-decoration: none;
+    transition: .6s;
+   
+ }
+ .member-email:hover {
+    opacity: 1;
+ }
+
+ .member-container {
+   display: flex; 
+   flex-direction: row;
+ }
+
+ @media only screen and (max-device-width: 1366px) {
+   .member-container {
+      display: flex;
+      flex-direction: column;
+   }
+
+   #header {
+      position: relative;
+      height: 40vh;
+      background-size: cover;
+      width: 100vw;
+      background-attachment: unset;
+   }
+   #member-page-view {
+      height: fit-content;
+      width: 100vw;
+      overflow-y: visible;
+   }
+
+   #member-page-content {
+      width: 100vw;
+   }
+ }
+ 
+</style>
+
+    <div class="container member-container">
+        <div id="header" style="background-image: url(/media/{{member.picture}});">
+        </div>
+
+        <div id="member-page-view">
+            <div id="member-page-content">
+                <div id="member-page-title">
+                        {{member.name}}
+                </div>
+
+                <div class="member-job">
+                        {{member.position}}
+                </div>
+
+                <a class="member-email" href="mailto:{{member.email}}">
+                    {{member.email}}
+                </a>
+                
+                <div id="member-page-text">
+                    {{member.description}}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

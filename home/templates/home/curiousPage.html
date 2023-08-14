@@ -1,0 +1,36 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+    {{program.program}} - 
+{% endblock %}
+
+{% block body %}
+
+    <div class="program-header" style="background-image: url(/media/{{program.image}});">
+        
+    </div>
+
+    <div class="container">
+        <img class="background-img" src="/media/img/floppy disk.png"/>
+            <div class="program-title">{{program.program}}</div>
+            <div class="program-description">{{program.description}}</div>
+
+            <div class="openFor">{{program.openFor}}</div>
+                        
+                        {% if program.hasSchedule %}
+                            <div class="intro" style="font-size: 28px; margin-top: 7vh; font-weight: 700;">{{program.year}} Schedule</div>
+                            <div class="schedule-view">
+                                {{program.schedule}}
+                                {% for date in program.schedules.all %}
+                                    <div class="schedule">
+                                        <div class="schedule-time">{{date.date}} {{date.start}}-{{date.end}}</div>
+                                        <div class="schedule-title">Day {{date.day}} - {{date.title}}</div>
+                                        <div class="schedule-description">{{date.description}}</div>
+                                        
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+    </div>
+{% endblock %}

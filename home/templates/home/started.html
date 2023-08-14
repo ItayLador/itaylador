@@ -1,0 +1,41 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+   Getting Started - 
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+
+    <div class="developing-view">
+        {% for program in programs %}
+            <div class="developing-program" style="background-image: url(/media/{{program.image}}); height: 42vh;">
+                <div class="program-shade"></div>
+                    <div class="developing-title" style="margin-top: 15vh;">{{program.program}}</div>
+
+                    <div class="developing-content">
+                        
+
+                        <div class="openFor">{{program.when}}</div>
+
+                        
+
+                         <div class="developing-description">{{program.description}}</div>
+
+                        
+                         <div class="intro">
+                            Who can do it?
+                        </div>
+                        <div class="developing-description" style="margin-top: .1vh;">
+                            {{program.who}}
+                        </div>
+                        
+                    </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

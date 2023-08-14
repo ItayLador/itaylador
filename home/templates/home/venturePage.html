@@ -1,0 +1,72 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+    {{program.program}} - 
+{% endblock %}
+
+{% block body %}
+
+    <div class="program-header" style="background-image: url(/media/{{program.image}});">
+        
+    </div>
+
+    <div class="container">
+        <img class="background-img" src="/media/img/floppy disk.png"/>
+            <div class="program-title">{{program.program}}</div>
+            <div class="program-description">{{program.description}}</div>
+
+            <div class="intro">Who is eligible?</div>
+                        <div class="expect">
+                            {{program.who}}
+                        </div>
+                        {% if program.hasRecieving %}
+                        <div class="expect-view">
+                            <div class="intro">
+                                For the student/postdoc’s supervisor/PI:
+                            </div>
+
+                            {% for expect in program.recievingSupervisor.all %}
+                                <div class="expect">
+                                    <p style="color: rgb(62, 66, 116);font-size: 17px; margin-right: 1vw;">>> </p>{{expect.expect}}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                        <div class="expect-view">
+                            <div class="intro">
+                                For the student/postdoc participants:
+                            </div>
+
+                            {% for expect in program.recievingStudent.all %}
+                                <div class="expect">
+                                    <p style="color: rgb(62, 66, 116);font-size: 17px; margin-right: 1vw;">>> </p>{{expect.expect}}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                        {% endif %}
+
+                     
+                        
+                        <div class="expect-view">
+                            <div class="intro">
+                                Program Expiriences:
+                            </div>
+
+                            {% for expect in program.activities.all %}
+                                <div class="expect">
+                                    <p style="color: rgb(62, 66, 116);font-size: 17px; margin-right: 1vw;">>> </p>{{expect.activity}}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+              
+
+                        <div style="margin-top: 5vh;">
+                            {{program.application |safe }}
+                        </div>
+    </div>
+{% endblock %}

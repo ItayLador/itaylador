@@ -1,0 +1,43 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+    {{program.program}} - 
+{% endblock %}
+
+{% block body %}
+
+    <div class="program-header" style="background-image: url(/media/{{program.image}});">
+        
+    </div>
+
+    <div class="container">
+        <img class="background-img" src="/media/img/floppy disk.png"/>
+            <div class="program-title">{{program.program}}</div>
+            <div class="program-description">{{program.description}}</div>
+
+            <div class="openFor">{{program.when}}</div>
+                        
+                         
+
+                        {% if program.hasRounds %}
+                        <div class="intro">Student Rounds: </div>
+                                {% for round in program.rounds.all %}
+                                    <div class="round-view">
+                                        <div class="round-title">{{round.name}} - {{round.date}}</div>
+                                        <div class="round-description">{{round.description}}</div>
+                                    </div>
+                                {% endfor %}
+                        {% endif %}
+                        
+                        <div class="intro">
+                            To apply you need: 
+                        </div>
+                        {% for expect in program.requirements.all %}
+                                <div class="expect">
+                                    <p style="color: rgb(62, 66, 116);font-size: 17px; margin-right: 1vw;">>> </p>{{expect.requirement}}
+                                </div>
+                        {% endfor %}  
+           
+    </div>
+{% endblock %}

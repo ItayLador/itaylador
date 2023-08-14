@@ -1,0 +1,142 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+    {{program.program}} - 
+{% endblock %}
+
+{% block body %}
+
+<style>
+    .years-view {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .year-view {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .year {
+        width: 90vw;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 5vh;
+        padding-left: 1vw;
+        padding-bottom: .5vh;
+        color: rgba(0,0,0,0.7);
+        margin-top: 4vh;
+    }
+
+    .company {
+        width: 40vw;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        margin-bottom: 10vh;
+        margin-right: 2.1vw;
+        margin-left: 2.1vw;
+        transition: .5s;
+        padding: .4vw;
+        text-decoration: none;
+        color: rgb(34, 33, 33);
+    }
+
+    .company-logo {
+        width: 100%;
+
+    }
+
+    .company-des {
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 600;
+        width: 90%;
+        margin-left: 5%;
+        margin-bottom: 1vh;
+    }
+
+    .company-industry {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 1vh;
+    }
+
+    .company-hiring {
+        font-size: 17px;
+        font-weight: 600;
+
+    }
+
+    .past-view {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 90vw;
+    }
+
+    .company-shadow {
+        width: 0%;
+        height: 100%;
+        background-color: rgb(31, 39, 86);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: .5s;
+    }
+
+    .company:hover .company-shadow {
+        width: 100%;
+    }
+
+    .company:hover {
+        color: white;
+    }
+</style>
+
+    <div class="program-header" style="background-image: url(/media/{{program.image}});">
+        
+    </div>
+
+    <div class="container">
+        <img class="background-img" src="/media/img/floppy disk.png"/>
+            <div class="program-title">{{program.program}}</div>
+            <div class="program-description">{{program.description}}</div>
+            <div class="openFor" style="margin-top: 3vh;"><strong>{{program.who}}</strong></div>
+
+            <div class="intro">Participating Startups</div>
+            <div id="years-view">
+                {% for year in program.years.all %}
+                <div class="year-view">
+                    <div class="year">{{year.year}} Fair</div>
+                    <div class="past-view">
+                        {% for company in year.members.all %}
+                            <a class="company" target="_blank" href="{{company.link}}">
+                                <div class="company-shadow"></div>
+                                <img class="company-logo" src="/media/{{company.image}}"/>
+                                <div class="company-des"><strong>{{company.name}}</strong> {{company.description}}</div>
+                                <div class="company-industry"><strong>Industry:</strong> {{company.industry}}</div>
+                                <div class="company-hiring"><strong>Hiring:</strong> {{company.hiring}}</div>
+                            </a>
+                        {% endfor %}
+                       
+                        
+                    </div>
+                </div>
+                {% endfor %}
+                
+
+            </div>
+            
+    </div>
+{% endblock %}

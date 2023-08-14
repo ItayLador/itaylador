@@ -1,0 +1,168 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+Undergraduate Entrepreneurship Minor - 
+{% endblock %}
+
+{% block body %}
+
+    <style>
+    #minor { 
+       border-bottom-color: #0B2365;
+       border-bottom-width: 5px;
+       border-style: solid;
+    }
+
+    #sect {
+        font-size: 25px;
+        font-weight: 700;
+        color: #0B2365;
+        margin-top: 1vh;
+    }
+    .header-minor {
+        font-size: 22px;
+        color: #2c4077;
+        font-weight: bold;
+        margin-bottom: 3vh;
+        width: 70vw;
+        line-height: 30px;
+    }
+
+    #courses-view {
+        margin-left: 3vw;
+        padding-top: 2vh;
+    }
+   </style>
+
+<div class="container" style="display: flex; flex-direction: column; padding-bottom: 0vh;">
+
+
+
+
+<div style="width: 100vw;">
+
+    
+
+    <div style="margin-left: 5vw;">
+        <img class="background-img" src="/media/img/lego.png"/>
+        <div class="header-minor">
+        The newly minted Entrepreneurship Minor provides students at Rice University with a pathway to pursue rigorous and interdisciplinary study in the field of innovation and entrepreneurship. The minor enables students to understand the theory and frameworks behind different disciplinary aspects of entrepreneurship and how to apply these theories to develop and scale innovative solutions to societal problems. Furthermore, the program helps students develop professional skills that are valuable beyond the confines of entrepreneurship
+    </div>
+       <div id="course-title" style="width: 100vw; position: relative; background-color: rgba(0, 0, 0, 0);">
+        {{page.kind}} Minor courses
+        </div> 
+
+        <div id="courses-view" style="width: 100vw;">
+            <div id="sect">
+                Students will complete 18 units to successfully complete the minor. 
+            </div>
+            <div id="sect">All students must take four core classes. These classes are:</div>
+        {% for course in required.all %}
+        
+        <div class="course-view" style="width: 70vw;">
+            <div id="over-one" class="over"></div>
+            <div id="over-two" class="over"></div>
+
+            <div class="course">
+                {{course.course}}
+            </div>
+
+            <div class="offered">
+                {{course.offeredIn}}
+            </div>
+
+            {% if course.requiredForMinor %}
+                <div class="required">
+                    course required for undergraduate minor
+                </div>
+            {% endif %}
+
+            <div class="course-des">
+                {{course.description}}
+            </div>
+        </div>
+            
+        {% endfor %}
+
+
+        <div id="sect">Students will then select 3.0 credits from the following list of courses:
+        </div>
+        {% for course in page.courses.all %}
+        {% if not course.capstone and not course.requiredForMinor %}
+        <div class="course-view" style="width: 70vw;">
+            <div id="over-one" class="over"></div>
+            <div id="over-two" class="over"></div>
+
+            <div class="course">
+                {{course.course}}
+            </div>
+
+            <div class="offered">
+                {{course.offeredIn}}
+            </div>
+
+            {% if course.requiredForMinor %}
+                <div class="required">
+                    course required for undergraduate minor
+                </div>
+            {% endif %}
+
+            {% if course.capstone %}
+                <div class="required">
+                    capstone
+                </div>
+            {% endif %}
+
+            <div class="course-des">
+                {{course.description}}
+            </div>
+        </div>
+            {% endif %}
+        {% endfor %}
+
+
+        <div id="sect">In the final year, students will complete 3.0 credits of the three final capstone courses:
+        </div>
+        {% for course in capstone.all %}
+        
+        <div class="course-view" style="width: 70vw;">
+            <div id="over-one" class="over"></div>
+            <div id="over-two" class="over"></div>
+
+            <div class="course">
+                {{course.course}}
+            </div>
+
+            <div class="offered">
+                {{course.offeredIn}}
+            </div>
+
+            {% if course.requiredForMinor %}
+                <div class="required">
+                    course required for undergraduate minor
+                </div>
+            {% endif %}
+
+            {% if course.capstone %}
+                <div class="required">
+                    capstone
+                </div>
+            {% endif %}
+
+            <div class="course-des">
+                {{course.description}}
+            </div>
+        </div>
+            
+        {% endfor %}
+
+
+        </div>
+        
+    </div>
+    
+</div>
+</div>
+
+{% endblock %}

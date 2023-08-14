@@ -1,0 +1,296 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+   {{page.kind}} - 
+{% endblock %}
+
+{% block body %}
+
+<style>
+            #for-you {
+                width: 47vw;
+                height: 63.5vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                scrollbar-width: none; /* Hide default scrollbar for Firefox */
+                -ms-overflow-style: none; /* Hide default scrollbar for Internet Explorer/Edge */
+            }
+
+            #for-you::-webkit-scrollbar {
+              width: 0px; /* Width of the scrollbar */
+            }
+
+            #for-you::-webkit-scrollbar-thumb {
+              background-color: #888; /* Color of the scrollbar thumb */
+            }
+
+            #for-you::-webkit-scrollbar-thumb:hover {
+              background-color: #555; /* Color of the scrollbar thumb on hover */
+            }
+
+
+            #for-you-title {
+                font-size: 35px;
+                color: #1d3167;
+                font-weight: bold;
+                position: fixed;
+                height: 7vh;
+                z-index: 7777;
+                width: 47vw;
+                align-self: flex-start;
+                padding-left: 1vw;
+                
+            }
+
+            #for-you-view {
+                margin-top: 8vh;
+            }
+
+            .events-title {
+                font-size: 28px;
+                font-weight: 700;
+                margin-left: 2.5vw;
+                margin-bottom: 3vh;
+                margin-top: 3vh;
+                color: #4d65a5;
+
+            }
+
+            .programs-container {
+                margin-left: 2vw;
+  
+            }
+
+            @media only screen and (max-device-width: 1366px) {
+                
+                #for-you {
+                    width: 100vw;
+                    overflow-y: visible;
+                    height: fit-content;
+                }
+            }
+
+            
+</style>
+
+{% if page.kind == "Graduate" %}
+    <style>
+        #Graduate {
+            border-bottom-color: #0B2365;
+                border-bottom-width: 5px;
+                border-style: solid;
+        }
+    </style>
+{% else %}
+        <style>
+            #Undergraduate {
+                border-bottom-color: #0B2365;
+                border-bottom-width: 5px;
+                border-style: solid;
+            }
+        </style>
+{% endif %}
+
+<div class="container" style="display: flex; flex-direction: column; padding-bottom: 0vh;">
+    
+    <div id="moto">
+        {{ page.moto }}
+    </div>
+
+    <div style="position: absolute; display: flex; flex-direction: row; height: 84vh;" class="background-img">
+        <img src="/media/img/bycicle2.png"  style="transform: rotate(0deg); position: relative;"/>
+                <img src="/media/img/bycicle1.png"  style="transform: rotate(0deg); position: relative;"/>
+                
+    </div>
+    
+
+
+
+<div id="planning" class="planning-in">
+    
+    <div id="options-view">
+        <div id="options-title">
+            START YOUR OWN ENTERPRENEURSHIP JOURNEY BY SPECIFYING WHAT YOU ARE LOOKING FOR
+        </div>
+
+        <div id="options">
+            {% for option in options %}
+
+                <div class="option" onclick="clicked('{{option.catagory}}')" id='{{option.catagory}}'>
+                    {{option.text}}
+                </div>
+
+            {% endfor %}
+        </div>
+
+        <div id="submit" onclick="start()">
+            <div class="shadow"></div>
+            start journey
+        </div>
+    </div>
+    
+</div>
+
+<div id="after-planning">
+
+        
+        <div id="courses" style="background-color: white;">
+                <div id="course-title">
+                        {{page.kind}} courses
+                </div> 
+
+            <div id="courses-view">
+            
+            </div>
+        
+        </div>
+
+    <div id="for-you">
+
+        <div id="for-you-view">
+            
+        <div class="programs-view">            
+            <div class="programs-container">
+               
+            </div>
+            
+        </div>  
+    </div>
+    </div>
+    
+</div>
+
+
+</div>
+
+
+
+<script>
+    var selected = []
+window.addEventListener("DOMContentLoaded", () => {
+    
+})
+
+function clicked(what) {
+    
+    if(selected.includes(what)){
+        selected.splice(selected.indexOf(what), 1) 
+        document.getElementById(what).style.backgroundColor = null;
+        document.getElementById(what).style.color = "black";
+
+
+    } else {
+        document.getElementById(what).style.backgroundColor = "#339be4"
+        document.getElementById(what).style.color = "white";
+        selected.push(what)
+    }
+    
+}
+
+function start() {
+    fetch(`/getPlan/`, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify({"selected":selected, "kind": `{{page.kind}}`})
+    })
+    .then(res => res.json())
+    .then(res => {
+
+        current = document.getElementById("planning")
+        current.classList.add("planning-out")
+
+        setTimeout(() => {
+            current.style.display = "none";
+            document.getElementById("after-planning").style.display = "flex";
+            document.getElementById("courses-view").style.marginTop = document.getElementById("course-title").clientHeight + 10 + "px"
+
+        }, 1000);
+
+        let courseView = document.getElementById("courses-view")
+        
+        for(let i = 0; i < res.courses.length; i++){
+            let course = res.courses[i];
+            
+            let newE = document.createElement("div")
+            newE.className = "course-view";
+
+            let required = `
+                <div class="required">
+                    course required for undergraduate minor
+                </div>
+            `
+
+            let capstone = `
+     
+                <div class="required">
+                    capstone
+                </div>
+           
+            `
+            newE.innerHTML = `
+            <div id="over-one" class="over"></div>
+            <div id="over-two" class="over"></div>
+
+            <div class="course">
+                ${course.course}
+            </div>
+
+            <div class="offered">
+                ${course.offeredIn}
+            </div>
+
+            ${course.requiredForMinor ? required : ``}
+            ${course.capstone ? capstone : ``}
+
+
+            <div class="course-des">
+                ${course.description}
+            </div>
+            `
+            courseView.appendChild(newE)
+        }
+        let string = ``
+        for(let i = 0; i < selected.length; i++){
+            if(i != 0 && i != selected.length - 1){
+                string += `, `
+            } else if(i == selected.length - 1 && i != 0){
+                string += ` and `
+            }
+            string += ` ${selected[i]}s`
+        } 
+        
+       document.getElementById("course-title").innerHTML = `{{page.kind}} Courses for` + string; 
+
+       let programsView = document.querySelector(".programs-container")
+
+       for(let i = 0; i < res.programs.length; i++){
+            let program = res.programs[i];
+            let newPro = document.createElement("div")
+            newPro.innerHTML = `
+                <a class="program" style="background-image: url(${program.img});" 
+                    href="${program.link}">
+
+                        <div class="program-name">
+                            ${program.name}
+                        </div>
+
+                    </a>
+            `
+            programsView.appendChild(newPro)
+       }
+       
+    })
+
+}
+
+ 
+</script>
+
+
+{% endblock %}

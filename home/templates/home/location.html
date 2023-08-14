@@ -1,0 +1,81 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+   Location - 
+{% endblock %}
+
+
+{% block body %}
+
+<style>
+    #location { 
+       border-bottom-color: #0B2365;
+       border-bottom-width: 5px;
+       border-style: solid;
+    }
+    #location-title {
+        font-size: 38px;
+        font-weight: 900;
+        color:#0B2365;
+        margin-top: 5vh;
+        margin-left: 2vw;
+    }
+    #head-location {
+        width: 100vw;
+        height: 70vh;
+        background-position:bottom;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-image: url('/media/img/lilie-lab-1.jpg');
+    }
+
+    .location-text {
+        font-size: 20px;
+        line-height: 33px;
+        width: 40vw;
+        margin-left: 4vw;
+    }
+    .image {
+        position: absolute;
+        right: 10px;
+        width: 10vw;
+    }
+
+    @media only screen and (max-device-width: 1366px) {
+        .location-text {
+            width: 90vw;
+        }
+    }
+</style>
+
+<div class="container">
+                    <img src="/media/img/traffic light.png" class="background-img" style=" align-self: flex-end; right: 0;"/>
+
+
+    <div id="head-location">
+
+    </div>
+
+    <div id="location-title">Location</div> <img src="/media/img/Da Vinci.png" class="background-img" style="height: 100vh;"/>
+    <div class="location-text">A flexible, modern learning and workspace, the Liu Idea Lab is Rice University’s on-campus hub for innovation and entrepreneurship. The Lab is located on the ground floor of the new Cambridge Office Building at the corner of Cambridge Street and Main Street on campus. 
+        <strong>Parking is available in the building garage.</strong> </div>
+
+    <div style="width: 100vw; position: relative; display: flex; flex-direction: column; align-items: flex-end;"> 
+
+        <div>
+
+            <div id="location-title">
+            Hours
+        </div>
+        <div class="location-text">
+            <div>>> 9:00 to 5:00 PM Monday – Thursday</div>
+            <div>>> Closed Fridays</div>
+        </div>
+        </div>
+
+    </div>
+
+    <img src="/media/img/lilie_lab_map (1).png" style="margin-left: 5vw; margin-top: 5vh;"/>
+</div>
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends 'home/layout.html' %}
+
+
+{% block title %}
+   I Have an Idea - 
+{% endblock %}
+
+
+{% block body %}
+
+<style>
+ #idea { 
+    border-bottom-color: #0B2365;
+    border-bottom-width: 5px;
+    border-style: solid;
+ }
+</style>
+
+<div class="container">
+
+    <div class="section">
+
+        <div style="position: absolute; width: 100vw; display: flex; flex-direction: row;  z-index: -1; overflow: hidden; height: 84vh;" >
+
+            <img src="/media/img/Darwin finch.png" class="background-img" style="justify-self: flex-end; position: absolute; display: flex; right: 0; max-width: 50%;"/>
+        </div>
+
+    <div id="meeting-view">
+
+        <div id="idea-intro">
+            Do you have an idea for an awsome startup?
+        </div>
+
+        <div id="idea-meet-with-team">
+            The first step in your journey would be setting up a meeting with a member of our team!
+        </div>
+
+        <div id="contact-view">
+            {% for member in members %}
+                <div class="idea-member">
+                    <div class="member-shadow-top"></div>
+                    <div class="member-shadow-bottom"></div>
+
+                    <img class="idea-image" src="/media/{{member.picture}}"/>
+                    <div class="member-name">{{member.name}}</div>
+                    <div class="member-job">{{member.position}}</div>
+                    <a target="_blank" class="member-link" href="{{member.schedule}}">Schedule Meeting</a>
+                </div>
+            {% endfor %}
+
+            {% for member in members %}
+                <div class="idea-member">
+                    <div class="member-shadow-top"></div>
+                    <div class="member-shadow-bottom"></div>
+
+                    <img class="idea-image" src="/media/{{member.picture}}"/>
+                    <div class="member-name">{{member.name}}</div>
+                    <div class="member-job">{{member.position}}</div>
+                    <a target="_blank" class="member-link" href="{{member.schedule}}">Schedule Meeting</a>
+                </div>
+            {% endfor %}
+
+            {% for member in members %}
+                <div class="idea-member">
+                    <div class="member-shadow-top"></div>
+                    <div class="member-shadow-bottom"></div>
+
+                    <img class="idea-image" src="/media/{{member.picture}}"/>
+                    <div class="member-name">{{member.name}}</div>
+                    <div class="member-job">{{member.position}}</div>
+                    <a target="_blank" class="member-link" href="{{member.schedule}}">Schedule Meeting</a>
+                </div>
+            {% endfor %}
+
+            {% for member in members %}
+                <div class="idea-member">
+                    <div class="member-shadow-top"></div>
+                    <div class="member-shadow-bottom"></div>
+
+                    <img class="idea-image" src="/media/{{member.picture}}"/>
+                    <div class="member-name">{{member.name}}</div>
+                    <div class="member-job">{{member.position}}</div>
+                    <a target="_blank" class="member-link" href="{{member.schedule}}">Schedule Meeting</a>
+                </div>
+            {% endfor %}
+
+            {% for member in members %}
+                <div class="idea-member">
+                    <div class="member-shadow-top"></div>
+                    <div class="member-shadow-bottom"></div>
+
+                    <img class="idea-image" src="/media/{{member.picture}}"/>
+                    <div class="member-name">{{member.name}}</div>
+                    <div class="member-job">{{member.position}}</div>
+                    <a target="_blank" class="member-link" href="{{member.schedule}}">Schedule Meeting</a>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <div id="for-you">
+       
+
+        <div id="for-you-view">
+            
+
+        <div class="programs-view">            
+            <div class="programs-container">
+                {% for program in programs %}
+
+                    <a class="program" style="background-image: url({{program.img}});" 
+                    href="{{program.link}}">
+
+                        <div class="program-name">
+                            {{program.name}}
+                        </div>
+
+                    </a>
+                {% endfor %}
+            </div>
+            
+            
+
+            
+        </div>
+        </div>  
+    </div>
+
+    </div>
+
+    </div>
+    
+    
+</div>
+
+
+{% endblock  %}

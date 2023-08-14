@@ -1,0 +1,30 @@
+{% extends 'home/layout.html' %}
+
+{% block title %}
+    Student Clubs - 
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="catagory-name">
+            Student Clubs
+        </div>
+
+        <div class="information">
+            {% for club in clubs %}
+
+                <a class="club" href="{{club.link}}" target="_blank">
+                    <div class="club-shadow"></div>
+                    <div class="club-name">
+                        {{club.club}}
+                    </div>
+                    
+                    <div class="club-description">
+                        {{club.description}}
+                    </div>
+                    
+                </a>
+        
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

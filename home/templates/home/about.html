@@ -1,0 +1,74 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+   About - 
+{% endblock %}
+
+{% block body %}
+
+<style>
+ #about-nav { 
+    border-bottom-color: #0B2365;
+    border-bottom-width: 5px;
+    border-style: solid;
+ }
+
+ #about-header {
+    width: 100vw;
+    background-position: center;
+    background-size: cover;
+    height: 70vh;
+    background-repeat: no-repeat;
+ }
+
+ .about-page-content {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+ }
+
+ p {
+    width: 65vw;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 35px;
+ }
+
+ .about-title {
+    font-size: 35px;
+    font-weight: 700;
+    color: #0B2365;
+    margin-top: 5vh;
+    width: 65vw;
+ }
+
+ @media only screen and (max-device-width: 1366px) {
+   p {
+      width: 90vw;
+   }
+   #about-header {
+      height: 40vh;
+   }
+ }
+</style>
+
+<div class="container" style="padding-top: 0vh;">
+    <div id="about-header" style="background-image:url(/media/{{about.image}});">
+
+    </div>
+    <img src="/media/img/camera lucida.png" class="background-img" style="height: 200vh; opacity: .15;"/>
+    <div class="about-page-content">
+        <div class="about-title"> About Lilie</div>
+        
+
+        <p>
+
+            {{about.text | safe}}
+        </p>
+        
+    </div>
+</div>
+{% endblock %}

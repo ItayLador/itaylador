@@ -1,0 +1,30 @@
+{% extends "home/layout.html" %}
+
+{% block title %}
+   Entrepreneurship Competitions - 
+{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <div class="developing-view">
+        {% for program in programs %}
+            <a class="developing-program" style="background-image: url(/media/{{program.image}});" href="/competition/{{program.program}}">
+                <div class="program-shade"></div>
+                    <div class="developing-title" >{{program.program}}</div>
+
+                    <div class="developing-content">
+                        
+
+                         <div class="developing-description">{{program.preview}}</div>
+
+                        
+                         <div class="developing-description">Click to read more</div>
+
+                    </div>
+                </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

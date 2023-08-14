@@ -1,0 +1,345 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+Home - 
+{% endblock %}
+
+{% block body %}
+
+
+<style>
+
+             #navigator {
+                padding: 3vh;
+                width: 100vw;
+                position: fixed;
+                z-index: 99999;
+                display: flex;
+                flex-direction: row;
+                transition: 1s;
+                width: 0px;
+                overflow-y: visible;
+             }
+
+            #logo {
+                width: auto;
+            }
+
+            #logo {
+                position: absolute;
+                height: 30vh;
+                margin-top: 35vh;
+                margin-left: 15vw;
+                transition: 2s;
+            }
+
+            #nav-content {
+                display: flex;
+                justify-self: right;
+                flex-direction: row;
+                align-items: center;
+                margin-left: 1vw;
+                display: none;
+            }
+
+            .container {
+                padding-top: 20vh;
+            }
+
+            #about-link {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                font-size: 16px;
+                text-decoration: none;
+                position: relative;
+                width: fit-content;
+                color: rgb(156, 176, 193);
+                transition: 1s;
+            }
+            #about-arrow {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                display: none;
+                transition: .6s;
+            }
+
+            #about-link:hover {
+                color: rgb(61, 124, 180);
+                font-size: 16px;
+            }
+
+            #about-link:hover #about-arrow {
+                animation: about-animation .6s;
+                display: flex;
+                font-size: 17px;
+                font-weight: 700;
+            }
+
+           
+
+            @keyframes about-animation {
+                from {
+                    transform: translateX(-400%);
+                } to {
+                    transform: translateX(0%);
+                }
+            }
+
+            #nav-content {
+                flex-wrap: nowrap;
+            }
+
+            #footer {
+                display: none;
+            }
+            @media only screen and (max-device-width: 1366px) {
+                #logo {
+                    height: 10vh;
+                }
+            }
+
+
+</style>
+
+
+    <div id="head">
+        <div id="head-shadow">
+            
+        </div>
+    </div>
+
+    <div class="container" id="home">
+
+
+        <div class="section" id="quote-about">
+
+            <img src="/media/img/Wright Patent.png" class="background-img"/>
+
+    <div id="quote-view" >
+            <div id="quote-text" style="font-family: Copperplate, Papyrus, fantasy;">
+                <div class="quote-odd">
+                "Your time is limited, so don’t waste it living someone else’s life. 
+               
+                Don’t be trapped by dogma – which is living with the results of other people’s thinking. 
+               </div>
+
+                <div class="quote-even">
+                Don’t let the noise of other’s opinions drown out your own inner voice. 
+                </div>
+
+                <div class="quote-odd">
+                And most important, have the courage to follow your heart and intuition. 
+                </div>
+
+                <div class="quote-even">
+                They somehow already know what you truly want to become. 
+                Everything else is secondary."
+                </div>
+                
+            </div>
+
+            <div id="quote-from">
+                -Steve Jobs
+            </div>
+        </div>
+
+
+            <div id="about-view">
+
+                <div id="about">
+                    <div id="about-image"></div>
+                    <div style="background-color: rgb(253, 247, 247); padding: 1.5vw" id="about-box">
+                        
+                        <div id="about-title">
+                        Liu Idea Lab for Innovation and Entrepreneurship
+                    </div>
+
+                    <div id="about-content">
+                    The Liu Idea Lab for Innovation and Entrepreneurship (Lilie) is the home of experiential learning and co-curricular activities in entrepreneurship and innovation at Rice University. Our mission is to equip Rice students with both entrepreneurial skills and the entrepreneurial mindset to prepare them to be entrepreneurs and innovators in whatever industry they choose, be it a technology startup, government, civic group, non-profit, small business, or large corporation.
+                    </div>
+
+                    <a href="/about" id="about-link">read more <div id="about-arrow">→</div></a>
+                    </div>
+                    
+                </div>
+                
+            </div>
+    </div>
+
+    <div class="section">
+        <img src="/media/img/US116842-0 bag machine.png" class="background-img"/>
+
+        <div id="stats">
+
+            {% for stat in stats %}
+            <div id="stat">
+                <div id="stat-num">
+                    {{stat.num}}
+                </div>
+                <div id="stat-des">
+                    {{stat.des}}
+                </div>
+            </div>
+                
+            {% endfor %}
+
+        </div>
+
+        <div id="other">
+
+        <div id="success-title">Success Stories</div>
+
+        <div id="success-view">
+            {% for alum in alumni %}
+                <div class="success">
+                    <div class="sover" id="over-top"></div>
+                    <div class="sover" id="over-bottom"></div>
+                    <div class="success-images">
+                            <img class="buisness-image" src="/media/{{alum.buisnessPicture}}"
+                            />
+                            <img class="alum-image" src="/media/{{alum.picture}}"
+                            />
+                            
+                    </div>
+
+                    <div class="alum-name">
+                        {{alum.name}}
+                    </div>
+                    <div class="alum-job">
+                        {{alum.buisness}} (${{alum.value}})
+                    </div>
+                </div>
+            {% endfor %}
+
+
+
+        </div>
+
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <div class="programs-container" style="width: 100vw; margin-top: 15vh;">
+            {% for program in programs %}
+
+                <a class="program" style="background-image: url({{program.img}}); width: 33.2vw;
+                height: 50vh;" 
+                href="{{program.link}}">
+
+                    <div class="program-name" style="font-size: 28px;">
+                        {{program.name}}
+                    </div>
+
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+</div>
+        
+
+
+    <script>
+        
+        window.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("logo").src = "/media/img/lilielogo-white.png";
+            document.getElementById("navigator").style.height = "8vh";
+            
+            if(isMobile){
+                document.querySelectorAll(".program").forEach((pro) => {
+                    pro.style.width = "100vw";
+                })
+            }
+        })
+
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    let offset = window.pageYOffset;
+    offset = window.scrollY;
+    return (
+        rect.top <= offset
+    );
+}
+        function quoteAction(){
+            let view = document.getElementById("quote-about");
+            let offset = window.pageYOffset;
+            console.log(offset, view.offsetHeight)
+            document.getElementById("quote-text").style.opacity = 1
+            var occsE = document.querySelectorAll('.quote-even'); 
+            occsE.forEach((oc) => {
+                oc.classList.add("even-animation")
+            })
+
+            var occsO = document.querySelectorAll('.quote-odd'); 
+            occsO.forEach((oc) => {
+                oc.classList.add("odd-animation")
+            })
+        }
+
+        function checkQuote() {
+            let view = document.getElementById("quote-about");
+            let offset = window.pageYOffset;
+            if(isInViewport(view)){
+                quoteAction()
+
+            }
+        }
+
+    window.addEventListener("scroll", checkQuote)
+           
+    const isMobile = window.matchMedia('(max-device-width: 1366px)').matches;
+
+    window.addEventListener("scroll", () => {
+            
+        let logo = document.getElementById("logo")
+        let bar = document.getElementById("navigator") 
+        
+        console.log(logo.style.height)
+
+        if(window.pageYOffset > 10){
+
+            document.getElementById("navigator").style.backgroundColor = "white";
+            logo.style.height = "8vh";
+
+            if (isMobile) {
+        
+                logo.style.height = "4vh";
+            }
+
+            logo.style.marginLeft = "0px";
+            logo.style.marginTop = "0px";
+            document.getElementById("head-shadow").style.opacity = 0;
+            document.getElementById("head").style.height = "0px"
+            setTimeout(() => {
+                logo.src = "/media/img/lilielogo.png";
+                logo.style.position = "relative";
+                bar.style.width = "100vw";
+                let navs = document.getElementById("nav-content")
+                navs.style.display = "flex";
+                
+                bar.style.height = "fit-content";
+                document.getElementById("home").style.display="flex";
+                document.getElementById("footer").style.display = "flex"
+                quoteAction()
+
+                setTimeout(() => {
+                    navs.style.flexWrap = "wrap";
+                }, 600);
+            }, 1350);
+
+        } else {
+
+        }
+    })
+</script>
+
+{% endblock %}

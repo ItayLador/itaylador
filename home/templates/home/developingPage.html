@@ -1,0 +1,44 @@
+{% extends "home/layout.html" %}
+
+
+{% block title %}
+    {{program.program}} - 
+{% endblock %}
+
+{% block body %}
+
+    <div class="program-header" style="background-image: url(/media/{{program.image}});">
+        
+    </div>
+
+    <div class="container">
+        <img class="background-img" src="/media/img/floppy disk.png"/>
+            <div class="program-title">{{program.program}}</div>
+            <div class="program-description">{{program.description}}</div>
+
+            {% if program.hasTimeline %}
+                <div class="intro">Timeline:</div>
+                {% for date in program.dates.all %}
+                    <div class="program-date-view">
+                        <div class="program-date">{{date.date}}</div>
+                        <div class="date-description">{{date.description}}</div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="intro">
+                Application requirements:
+            </div>
+            {% for expect in program.requirements.all %}
+                    <div class="expect">
+                        <p style="color: rgb(62, 66, 116);font-size: 17px; margin-right: 1vw;">>> </p>{{expect.requirement}}
+                    </div>
+            {% endfor %}
+
+            
+            {% if True %}
+                 <div class="intro">Application: </div>   
+                <div class="program-description">{{program.application | safe}}</div>
+            {% endif %}
+    </div>
+{% endblock %}

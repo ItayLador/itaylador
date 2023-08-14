@@ -1,0 +1,40 @@
+{% extends "home/layout.html" %}
+
+{% block title %}
+Getting Curious - 
+{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <div class="developing-view">
+        {% for program in programs %}
+            <a class="developing-program" style="background-image: url(/media/{{program.image}});" href="/curious/{{program.program}}">
+                <div class="program-shade"></div>
+                    <div class="developing-title">{{program.program}}</div>
+
+                    <div class="developing-content">
+                        <div class="developing-description">{{program.preview}}</div>
+
+                        <div class="developing-description">Click to learn more</div>
+
+                    </div>
+                </a>
+        {% endfor %}
+
+        <a class="developing-program" style="background-image: url(/media/{{fair.image}});" href="jobfair/{{fair.program}}">
+            <div class="program-shade"></div>
+                <div class="developing-title">{{fair.program}}</div>
+
+                <div class="developing-content">
+                    <div class="developing-description">{{fair.preview}}</div>
+
+                    <div class="developing-description">Click to learn more</div>
+
+                </div>
+            </a>
+
+    </div>
+</div>
+
+{% endblock %}

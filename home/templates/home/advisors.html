@@ -1,0 +1,96 @@
+{% extends "home/layout.html" %}
+
+{% block title %}
+   Advisory Board - 
+{% endblock %}
+
+{% block body %}
+<style>
+    #advisor { 
+       border-bottom-color: #0B2365;
+       border-bottom-width: 5px;
+       border-style: solid;
+    }
+
+    #team-title {
+        font-size: 35px;
+        color: #0B2365;
+        font-weight: bold;
+
+    }
+    .idea-image {
+        border-radius: 3px;
+        margin-bottom: 0vh;
+        height: 310px;
+        width: 310px;
+        
+    }
+    .idea-member {
+        padding: 0px;
+        min-height: 530px;
+        width: 320px;
+        background-color: white;
+        padding-top: .5vh;
+        border-width: 1px;
+        border-style: solid;
+        text-decoration: none;
+        color: black;
+    }
+    .member-name {
+        padding: 1vw;
+        text-align: left;
+        width: 100%;
+        padding-left: 2vw;
+        padding-right: 1vw;
+        color: #1a3d9d;
+        transition: 1s;
+    }
+
+    .member-container {
+        padding-left: 5vw;
+        padding-right: 5vw;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 5vh;
+    }
+
+    .member-job {
+        padding-left: 1vw;
+        padding-right: 1vw;
+        font-size: 17px;
+    }
+
+    .idea-member:hover .member-name {
+        color: whitesmoke;
+    }
+
+    .members {
+        width: 90vw;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+   
+</style>
+    <div class="container">
+        <div id="team-title">Meet Our Advisory Board</div>
+    </div>
+
+    <div class="member-container">
+        <div class="members">
+        {% for member in members %}
+                <a class="idea-member" href="/member/{{member.name}}">
+                    <div class="member-shadow-top"></div>
+                    <div class="member-shadow-bottom"></div>
+
+                    <img class="idea-image" src="/media/{{member.picture}}"/>
+                    <div class="member-name">{{member.name}}</div>
+                    <div class="member-job">{{member.position}}</div>
+                </a>
+        {% endfor %}
+        
+        </div>
+    </div>
+{% endblock %}
